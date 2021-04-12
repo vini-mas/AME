@@ -1,8 +1,9 @@
 # ame
 
-A new Flutter application.
-
 ## Getting Started
+
+https://flutter.dev/docs/get-started/
+Para se guiar, as telas ficam na pasta lib.
 
 This project is a starting point for a Flutter application.
 
