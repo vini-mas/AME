@@ -1,14 +1,30 @@
+import 'package:ame/professorProfileView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'Models/evaluation.dart';
+import 'Models/professor.dart';
+import 'amecolors.dart';
 
 class ProfessorsScreen extends StatefulWidget {
   @override
   _ProfessorsScreenState createState() => _ProfessorsScreenState();
 }
 
+List<Evaluation> evaluations = [
+  Evaluation("John", "3.8", initialDescription),
+  Evaluation("João", "4.2", initialDescription),
+  Evaluation("Sena", "3.9", null),
+  Evaluation("Maria", "4.7", initialDescription),
+  Evaluation("Fred", "0.2", "sauusahuhsau"),
+  Evaluation("Jake", "1.0", initialDescription),
+];
+
 class _ProfessorsScreenState extends State<ProfessorsScreen> {
-  static const Color blueColor = Color(0xff4361ee);
+  Professor? _selectedProfessor;
+  String? _selectedInstitute;
+
 
   List<String> institutes = [
     "Institute 1",
@@ -21,24 +37,17 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
     "Institute 8",
   ];
 
-  List<String> professors = [
-    "João da Silva",
-    "Maria da Silva",
-    "Professor 3",
-    "Professor 4",
-    "Professor 5",
-    "Professor 6",
-    "Professor 7",
-    "Professor 8",
-    "Professor 9",
-    "Professor 10",
-    "Professor 11",
-    "Professor 12",
-    "Professor 13",
+  List<Professor> professors = [
+    Professor("João da Silva Rodrigues", "1.2", evaluations),
+    Professor("Maria da Silva Rodrigues", "1.2", evaluations),
+    Professor("Jorge da Silva Rodrigues", "1.2", evaluations),
+    Professor("Rodolfo da Silva Rodrigues", "1.2", evaluations),
+    Professor("Emanuel da Silva Rodrigues", "1.2", evaluations),
+    Professor("Fred da Silva Rodrigues", "1.2", evaluations),
+    Professor("Francisco da Silva Rodrigues", "1.2", evaluations),
+    Professor("Roberta da Silva Rodrigues", "1.2", evaluations),
+    Professor("Sanderson da Silva Rodrigues", "1.2", evaluations),
   ];
-
-  String selectedProfessor;
-  String selectedInstitute;
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +56,23 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
             margin: EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               children: <Widget>[
+                SizedBox(height: 70),
                 Container(
-                    height: 205,
+                    height: 105,
                     margin: EdgeInsets.symmetric(horizontal: 15),
                     child: Column(children: <Widget>[
-                      SizedBox(height: 100),
                       DropdownButton(
-                        hint: Text("Selecione um instituto...", style: TextStyle(color: blueColor.withOpacity(0.6)),),
+                        hint: Text(
+                          "Selecione um instituto...",
+                          style: TextStyle(color: AmeColors.primaryBlue.withOpacity(0.6)),
+                        ),
                         icon: const Icon(Icons.arrow_drop_down,
-                            size: 32, color: blueColor),
-                        value: selectedInstitute,
+                            size: 32, color: AmeColors.primaryBlue),
+                        value: _selectedInstitute,
                         isExpanded: true,
-                        onChanged: (String newValue) {
+                        onChanged: (String? newValue) {
                           setState(() {
-                            selectedInstitute = newValue;
+                            _selectedInstitute = newValue;
                           });
                         },
                         items: institutes
@@ -68,28 +80,30 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
                                 value: institute,
                                 child: Text(
                                   institute,
-                                  style: TextStyle(color: blueColor),
+                                  style: TextStyle(color: AmeColors.primaryBlue),
                                 )))
                             .toList(),
                       ),
                       DropdownButton(
-                        hint: Text("Procure um professor...", style: TextStyle(color: blueColor.withOpacity(0.6))),
+                        hint: Text("Procure um professor...",
+                            style:
+                                TextStyle(color: AmeColors.primaryBlue.withOpacity(0.6))),
                         icon: const Icon(Icons.search,
-                            size: 24, color: blueColor),
-                        value: selectedProfessor,
+                            size: 24, color: AmeColors.primaryBlue),
+                        value: _selectedProfessor,
                         isExpanded: true,
-                        onChanged: (String newValue) {
+                        onChanged: (Professor? newValue) {
                           setState(() {
-                            selectedProfessor = newValue;
+                            _selectedProfessor = newValue;
                           });
                         },
                         items: professors
                             .map((professor) => DropdownMenuItem(
-                            value: professor,
-                            child: Text(
-                              professor,
-                              style: TextStyle(color: blueColor),
-                            )))
+                                value: professor,
+                                child: Text(
+                                  professor.name,
+                                  style: TextStyle(color: AmeColors.primaryBlue),
+                                )))
                             .toList(),
                       ),
                     ])),
@@ -100,7 +114,7 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
                       padding: EdgeInsets.only(bottom: 10),
                       shrinkWrap: true,
                       children: professors
-                          .map<Widget>((name) => _buildTextField(name, ""))
+                          .map<Widget>((professor) => _professorCard(professor))
                           .toList(),
                       //SizedBox(height: 10),
                     )),
@@ -108,32 +122,64 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
             )));
   }
 
-  _buildTextField(String name, String rate) {
+  _professorCard(Professor professor) {
     return Column(
       children: <Widget>[
         SizedBox(height: 10),
-        Container(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-            height: 50,
-            width: 350,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    blurRadius: 6,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(name, style: TextStyle(color: blueColor, fontSize: 16, fontWeight: FontWeight.w400))
-                ]))
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(_routeProfessorProfileView(professor));
+          },
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              height: 50,
+              width: 350,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 6,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      constraints: BoxConstraints(maxWidth: 220),
+                      child: Text(
+                        professor.name,
+                        style: GoogleFonts.montserrat(
+                          color: AmeColors.primaryBlue,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        softWrap: true,
+                      ),
+                    ),
+                    Expanded(flex: 1, child: Container()),
+                    Text(professor.rate,
+                        style: GoogleFonts.montserrat(
+                            color: AmeColors.rateGreen,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500)),
+                  ])),
+        )
       ],
+    );
+  }
+
+  Route _routeProfessorProfileView(Professor professor) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          ProfessorProfileView(professor: professor,),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return child;
+      },
     );
   }
 }
