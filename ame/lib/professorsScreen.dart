@@ -21,37 +21,52 @@ List<Evaluation> evaluations = [
   Evaluation("Jake", "1.0", initialDescription),
 ];
 
+List<String> institutes = [
+  "Instituto de Informática",
+  "Instituto 2",
+  "Instituto 3",
+];
+
+List<Professor> professors = [
+  Professor("João da Silva Rodrigues", "1.7", evaluations),
+  Professor("Maria da Silva Rodrigues", "4.2", evaluations),
+  Professor("Jorge da Silva Rodrigues", "3.2", evaluations),
+  Professor("Rodolfo da Silva Rodrigues", "5.0", evaluations),
+  Professor("Emanuel da Silva Rodrigues", "4.7", evaluations),
+  Professor("Fred da Silva Rodrigues", "2.3", evaluations),
+  Professor("Francisco da Silva Rodrigues", "3.4", evaluations),
+  Professor("Roberta da Silva Rodrigues", "4.4", evaluations),
+  Professor("Sanderson da Silva Rodrigues", "4.1", evaluations),
+];
+
 class _ProfessorsScreenState extends State<ProfessorsScreen> {
-  Professor? _selectedProfessor;
+  String _selectedProfessor = "";
   String? _selectedInstitute;
+  List<Professor> _filteredProfessors = professors;
 
+  void setFilteredProfessors(String search)  {
+    List<Professor> filteredProfessors = [];
 
-  List<String> institutes = [
-    "Institute 1",
-    "Institute 2",
-    "Institute 3",
-    "Institute 4",
-    "Institute 5",
-    "Institute 6",
-    "Institute 7",
-    "Institute 8",
-  ];
+    professors.forEach((professor) {
+      if (professor.name
+          .toLowerCase()
+          .contains(search.toLowerCase()) ||
+          professor.name
+              .toLowerCase()
+              .contains(search.toLowerCase()))
+        filteredProfessors.add(professor);
+    });
 
-  List<Professor> professors = [
-    Professor("João da Silva Rodrigues", "1.2", evaluations),
-    Professor("Maria da Silva Rodrigues", "1.2", evaluations),
-    Professor("Jorge da Silva Rodrigues", "1.2", evaluations),
-    Professor("Rodolfo da Silva Rodrigues", "1.2", evaluations),
-    Professor("Emanuel da Silva Rodrigues", "1.2", evaluations),
-    Professor("Fred da Silva Rodrigues", "1.2", evaluations),
-    Professor("Francisco da Silva Rodrigues", "1.2", evaluations),
-    Professor("Roberta da Silva Rodrigues", "1.2", evaluations),
-    Professor("Sanderson da Silva Rodrigues", "1.2", evaluations),
-  ];
+    setState(() {
+      _filteredProfessors = filteredProfessors;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
             margin: EdgeInsets.symmetric(horizontal: 40),
             child: Column(
@@ -59,64 +74,96 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
                 SizedBox(height: 70),
                 Container(
                     height: 105,
-                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    margin: EdgeInsets.symmetric(horizontal: 5),
                     child: Column(children: <Widget>[
-                      DropdownButton(
-                        hint: Text(
-                          "Selecione um instituto...",
-                          style: TextStyle(color: AmeColors.primaryBlue.withOpacity(0.6)),
-                        ),
-                        icon: const Icon(Icons.arrow_drop_down,
-                            size: 32, color: AmeColors.primaryBlue),
-                        value: _selectedInstitute,
-                        isExpanded: true,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedInstitute = newValue;
-                          });
-                        },
-                        items: institutes
-                            .map((institute) => DropdownMenuItem(
-                                value: institute,
-                                child: Text(
-                                  institute,
-                                  style: TextStyle(color: AmeColors.primaryBlue),
-                                )))
-                            .toList(),
-                      ),
-                      DropdownButton(
-                        hint: Text("Procure um professor...",
-                            style:
-                                TextStyle(color: AmeColors.primaryBlue.withOpacity(0.6))),
-                        icon: const Icon(Icons.search,
-                            size: 24, color: AmeColors.primaryBlue),
-                        value: _selectedProfessor,
-                        isExpanded: true,
-                        onChanged: (Professor? newValue) {
-                          setState(() {
-                            _selectedProfessor = newValue;
-                          });
-                        },
-                        items: professors
-                            .map((professor) => DropdownMenuItem(
-                                value: professor,
-                                child: Text(
-                                  professor.name,
-                                  style: TextStyle(color: AmeColors.primaryBlue),
-                                )))
-                            .toList(),
-                      ),
+                      Container(
+                          height: 40,
+                          child: Material(
+                              elevation: 6,
+                              shadowColor: Colors.grey.withOpacity(0.8),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              child: DropdownButtonHideUnderline(
+                                  child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton(
+                                        hint: Text(
+                                          "Selecione um instituto...",
+                                          style: TextStyle(
+                                              color: AmeColors.primaryBlue
+                                                  .withOpacity(0.6),
+                                              fontSize: 15),
+                                        ),
+                                        icon: const Icon(Icons.arrow_drop_down,
+                                            size: 32,
+                                            color: AmeColors.primaryBlue),
+                                        value: _selectedInstitute,
+                                        isExpanded: true,
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            _selectedInstitute = newValue;
+                                          });
+                                        },
+                                        style: TextStyle(),
+                                        items: institutes
+                                            .map(
+                                                (institute) => DropdownMenuItem(
+                                                    value: institute,
+                                                    child: Text(
+                                                      institute,
+                                                      style: TextStyle(
+                                                          color: AmeColors
+                                                              .primaryBlue),
+                                                    )))
+                                            .toList(),
+                                      ))))),
+                      SizedBox(height: 10),
+                      Container(
+                          height: 40,
+                          child: Material(
+                            elevation: 6,
+                            shadowColor: Colors.grey.withOpacity(0.8),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                hintText: 'Procure um professor...',
+                                hintStyle:
+                                    TextStyle(color: AmeColors.primaryBlue),
+                                suffixIcon: const Icon(Icons.search,
+                                    size: 24, color: AmeColors.primaryBlue),
+                              ),
+                              style: TextStyle(
+                                  color: AmeColors.primaryBlue, fontSize: 15),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  _selectedProfessor = newValue;
+                                  setFilteredProfessors(newValue);
+                                });
+                              },
+                            ),
+                          )),
                     ])),
                 Container(
                     height: 550,
-                    child: ListView(
-                      //https://api.flutter.dev/flutter/widgets/ListView-class.html
+                    child: ListView.builder(
+                      itemCount: _filteredProfessors.length,
+                      itemBuilder: (_, i) {
+                        return ListTile(
+                          title: _professorCard(_filteredProfessors[i]),
+                        );
+                      },
                       padding: EdgeInsets.only(bottom: 10),
                       shrinkWrap: true,
-                      children: professors
-                          .map<Widget>((professor) => _professorCard(professor))
-                          .toList(),
-                      //SizedBox(height: 10),
                     )),
               ],
             )));
@@ -132,7 +179,6 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
           },
           child: Container(
               padding: EdgeInsets.symmetric(horizontal: 15),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
               height: 50,
               width: 350,
               decoration: BoxDecoration(
@@ -164,7 +210,7 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
                     Expanded(flex: 1, child: Container()),
                     Text(professor.rate,
                         style: GoogleFonts.montserrat(
-                            color: AmeColors.rateGreen,
+                            color: AmeColors().getRatingColor(professor.rate),
                             fontSize: 15,
                             fontWeight: FontWeight.w500)),
                   ])),
@@ -176,7 +222,9 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
   Route _routeProfessorProfileView(Professor professor) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          ProfessorProfileView(professor: professor,),
+          ProfessorProfileView(
+        professor: professor,
+      ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return child;
       },

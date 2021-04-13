@@ -12,4 +12,12 @@ class AmeColors {
 
   static const Color white = Color(0xffffffff);
   static const Color lightGray = Color(0xff7E7E7E);
+
+  Color getRatingColor(String rate) {
+    if(double.parse(rate) >= 4.0)
+      return AmeColors.rateGreen;
+    if(double.parse(rate) >= 2.0)
+      return AmeColors.rateYellow;
+    return AmeColors.rateRed;
+  }
 }

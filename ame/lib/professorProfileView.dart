@@ -22,6 +22,7 @@ class _ProfessorProfileViewState extends State<ProfessorProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
             margin: EdgeInsets.symmetric(horizontal: 40),
             child: Column(children: <Widget>[
@@ -79,7 +80,7 @@ class _ProfessorProfileViewState extends State<ProfessorProfileView> {
               Expanded(flex: 1, child: Container()),
               Text(widget.professor?.rate ?? "--",
                   style: GoogleFonts.montserrat(
-                      color: AmeColors.rateGreen,
+                      color: AmeColors().getRatingColor(widget.professor?.rate ?? "5.0"),
                       fontSize: 24,
                       fontWeight: FontWeight.w400)),
             ]));
@@ -128,7 +129,7 @@ class _ProfessorProfileViewState extends State<ProfessorProfileView> {
                       Expanded(flex: 1, child: Container()),
                       Text(evaluation.rate,
                           style: GoogleFonts.montserrat(
-                              color: AmeColors.rateGreen, fontSize: 16)),
+                              color: AmeColors().getRatingColor(evaluation.rate), fontSize: 16)),
                     ]),
                 SizedBox(height: 6),
                 Container(
