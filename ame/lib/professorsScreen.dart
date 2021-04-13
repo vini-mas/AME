@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 class ProfessorsScreen extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class ProfessorsScreen extends StatefulWidget {
 class _ProfessorsScreenState extends State<ProfessorsScreen> {
   static const Color blueColor = Color(0xff4361ee);
 
-  List<String> intitutes = [
+  List<String> institutes = [
     "Institute 1",
     "Institute 2",
     "Institute 3",
@@ -63,11 +63,11 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
                             selectedInstitute = newValue;
                           });
                         },
-                        items: professors
-                            .map((professor) => DropdownMenuItem(
-                                value: professor,
+                        items: institutes
+                            .map((institute) => DropdownMenuItem(
+                                value: institute,
                                 child: Text(
-                                  professor,
+                                  institute,
                                   style: TextStyle(color: blueColor),
                                 )))
                             .toList(),
