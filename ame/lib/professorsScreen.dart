@@ -40,7 +40,6 @@ List<Professor> professors = [
 ];
 
 class _ProfessorsScreenState extends State<ProfessorsScreen> {
-  String _selectedProfessor = "";
   String? _selectedInstitute;
   List<Professor> _filteredProfessors = professors;
 
@@ -146,7 +145,6 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
                                   color: AmeColors.primaryBlue, fontSize: 15),
                               onChanged: (String newValue) {
                                 setState(() {
-                                  _selectedProfessor = newValue;
                                   setFilteredProfessors(newValue);
                                 });
                               },

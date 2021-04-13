@@ -37,7 +37,7 @@ class _ProfessorProfileViewState extends State<ProfessorProfileView> {
                     //https://api.flutter.dev/flutter/widgets/ListView-class.html
                     padding: EdgeInsets.only(bottom: 10),
                     shrinkWrap: true,
-                    children: (widget.professor?.evaluations ?? [])
+                    children: (widget.professor.evaluations)
                         .map<Widget>(
                             (evaluation) => _evaluationCard(evaluation))
                         .toList(),
@@ -68,7 +68,7 @@ class _ProfessorProfileViewState extends State<ProfessorProfileView> {
               Container(
                 constraints: BoxConstraints(maxWidth: 220),
                 child: Text(
-                  widget.professor?.name ?? "--",
+                  widget.professor.name,
                   style: GoogleFonts.montserrat(
                     color: AmeColors.primaryBlue,
                     fontSize: 24,
@@ -78,9 +78,9 @@ class _ProfessorProfileViewState extends State<ProfessorProfileView> {
                 ),
               ),
               Expanded(flex: 1, child: Container()),
-              Text(widget.professor?.rate ?? "--",
+              Text(widget.professor.rate,
                   style: GoogleFonts.montserrat(
-                      color: AmeColors().getRatingColor(widget.professor?.rate ?? "5.0"),
+                      color: AmeColors().getRatingColor(widget.professor.rate),
                       fontSize: 24,
                       fontWeight: FontWeight.w400)),
             ]));
