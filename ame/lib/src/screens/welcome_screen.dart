@@ -1,4 +1,4 @@
-import 'package:ame/src/styles.dart';
+import 'package:ame/src/styles/ame_colors.dart';
 import 'package:ame/src/screens/teacher_list_screen.dart';
 import 'package:flutter/material.dart';
 

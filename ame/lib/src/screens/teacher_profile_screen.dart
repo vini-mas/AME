@@ -1,15 +1,15 @@
-import 'package:ame/src/Models/professor.dart';
+import 'package:ame/src/models/teacher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Models/evaluation.dart';
-import '/src/styles.dart';
+import '../models/review.dart';
+import '../styles/ame_colors.dart';
 
 class TeacherProfileScreen extends StatefulWidget {
-  final Professor professor;
+  final Teacher teacher;
 
-  TeacherProfileScreen({Key? key, required this.professor}) : super(key: key);
+  TeacherProfileScreen({Key? key, required this.teacher}) : super(key: key);
 
   _TeacherProfileScreenState createState() => _TeacherProfileScreenState();
 }
@@ -28,7 +28,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
               SizedBox(
                 height: 70,
               ),
-              _professorCard(),
+              _teacherCard(),
               SizedBox(height: 10),
               Container(
                   height: 550,
@@ -36,16 +36,15 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                     //https://api.flutter.dev/flutter/widgets/ListView-class.html
                     padding: EdgeInsets.only(bottom: 10),
                     shrinkWrap: true,
-                    children: (widget.professor.evaluations)
-                        .map<Widget>(
-                            (evaluation) => _evaluationCard(evaluation))
+                    children: (widget.teacher.reviews)
+                        .map<Widget>((review) => _reviewCard(review))
                         .toList(),
                     //SizedBox(height: 10),
                   )),
             ])));
   }
 
-  _professorCard() {
+  _teacherCard() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: 90,
@@ -67,7 +66,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
               Container(
                 constraints: BoxConstraints(maxWidth: 220),
                 child: Text(
-                  widget.professor.name,
+                  widget.teacher.name,
                   style: GoogleFonts.montserrat(
                     color: AmeColors.primaryBlue,
                     fontSize: 24,
@@ -77,15 +76,15 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                 ),
               ),
               Expanded(flex: 1, child: Container()),
-              Text(widget.professor.rate,
+              Text(widget.teacher.rate,
                   style: GoogleFonts.montserrat(
-                      color: AmeColors().getRatingColor(widget.professor.rate),
+                      color: AmeColors().getRatingColor(widget.teacher.rate),
                       fontSize: 24,
                       fontWeight: FontWeight.w400)),
             ]));
   }
 
-  _evaluationCard(Evaluation evaluation) {
+  _reviewCard(Review review) {
     return Column(
       children: <Widget>[
         SizedBox(height: 10),
@@ -116,7 +115,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                       Container(
                         constraints: BoxConstraints(maxWidth: 220),
                         child: Text(
-                          evaluation.name,
+                          review.name,
                           style: GoogleFonts.montserrat(
                             color: AmeColors.primaryBlue,
                             fontSize: 16,
@@ -126,10 +125,9 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                         ),
                       ),
                       Expanded(flex: 1, child: Container()),
-                      Text(evaluation.rate,
+                      Text(review.rate,
                           style: GoogleFonts.montserrat(
-                              color:
-                                  AmeColors().getRatingColor(evaluation.rate),
+                              color: AmeColors().getRatingColor(review.rate),
                               fontSize: 16)),
                     ]),
                 SizedBox(height: 6),
@@ -141,7 +139,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                         Expanded(
                           flex: 1,
                           child: Text(
-                            evaluation.description,
+                            review.description,
                             style: GoogleFonts.montserrat(
                               color: AmeColors.lightGray,
                               fontSize: 14,
