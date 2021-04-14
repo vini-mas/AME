@@ -1,24 +1,23 @@
-import 'package:ame/Models/professor.dart';
+import 'package:ame/src/Models/professor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Models/evaluation.dart';
-import 'amecolors.dart';
+import '../Models/evaluation.dart';
+import '/src/styles.dart';
 
-class ProfessorProfileView extends StatefulWidget {
+class TeacherProfileScreen extends StatefulWidget {
   final Professor professor;
 
-  ProfessorProfileView({Key? key, required this.professor}) : super(key: key);
+  TeacherProfileScreen({Key? key, required this.professor}) : super(key: key);
 
-  _ProfessorProfileViewState createState() => _ProfessorProfileViewState();
+  _TeacherProfileScreenState createState() => _TeacherProfileScreenState();
 }
 
 String initialDescription =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
-class _ProfessorProfileViewState extends State<ProfessorProfileView> {
-
+class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,7 +128,9 @@ class _ProfessorProfileViewState extends State<ProfessorProfileView> {
                       Expanded(flex: 1, child: Container()),
                       Text(evaluation.rate,
                           style: GoogleFonts.montserrat(
-                              color: AmeColors().getRatingColor(evaluation.rate), fontSize: 16)),
+                              color:
+                                  AmeColors().getRatingColor(evaluation.rate),
+                              fontSize: 16)),
                     ]),
                 SizedBox(height: 6),
                 Container(

@@ -1,15 +1,17 @@
-import 'package:ame/professorProfileView.dart';
+import 'package:ame/src/screens/teacher_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Models/evaluation.dart';
-import 'Models/professor.dart';
-import 'amecolors.dart';
+import '../Models/evaluation.dart';
+import '../Models/professor.dart';
+import '/src/styles.dart';
 
-class ProfessorsScreen extends StatefulWidget {
+class TeacherListScreen extends StatefulWidget {
+  static const String routeName = '/teacher_list_screen';
+
   @override
-  _ProfessorsScreenState createState() => _ProfessorsScreenState();
+  _TeacherListScreenState createState() => _TeacherListScreenState();
 }
 
 List<Evaluation> evaluations = [
@@ -39,20 +41,16 @@ List<Professor> professors = [
   Professor("Sanderson da Silva Rodrigues", "4.1", evaluations),
 ];
 
-class _ProfessorsScreenState extends State<ProfessorsScreen> {
+class _TeacherListScreenState extends State<TeacherListScreen> {
   String? _selectedInstitute;
   List<Professor> _filteredProfessors = professors;
 
-  void setFilteredProfessors(String search)  {
+  void setFilteredProfessors(String search) {
     List<Professor> filteredProfessors = [];
 
     professors.forEach((professor) {
-      if (professor.name
-          .toLowerCase()
-          .contains(search.toLowerCase()) ||
-          professor.name
-              .toLowerCase()
-              .contains(search.toLowerCase()))
+      if (professor.name.toLowerCase().contains(search.toLowerCase()) ||
+          professor.name.toLowerCase().contains(search.toLowerCase()))
         filteredProfessors.add(professor);
     });
 
@@ -63,7 +61,6 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -220,7 +217,7 @@ class _ProfessorsScreenState extends State<ProfessorsScreen> {
   Route _routeProfessorProfileView(Professor professor) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          ProfessorProfileView(
+          TeacherProfileScreen(
         professor: professor,
       ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
