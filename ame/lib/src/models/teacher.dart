@@ -10,4 +10,12 @@ class Teacher {
     this.rate = rate ?? this.rate;
     this.reviews = reviews ?? [];
   }
+
+  factory Teacher.fromJson(Map<String, dynamic> json) {
+    return Teacher(
+      json['name'],
+      json['rate'],
+      json['reviews'],
+    );
+  }
 }
