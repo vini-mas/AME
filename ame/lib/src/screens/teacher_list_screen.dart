@@ -152,7 +152,7 @@ class _TeacherListScreenState extends State<TeacherListScreen> {
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
                       blurRadius: 6,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: Offset(0, 3),
                     ),
                   ],
                   borderRadius: BorderRadius.all(Radius.circular(5))),

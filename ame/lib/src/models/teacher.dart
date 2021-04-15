@@ -1,21 +1,20 @@
 import 'review.dart';
 
 class Teacher {
-  String name = "--";
-  String rate = "--";
-  List<Review> reviews = [];
+  final String name;
+  final String rate;
+  final List<Review> reviews;
 
-  Teacher(String name, String? rate, List<Review>? reviews) {
-    this.name = name;
-    this.rate = rate ?? this.rate;
-    this.reviews = reviews ?? [];
-  }
+  Teacher(this.name, this.rate, this.reviews);
 
-  factory Teacher.fromJson(Map<String, dynamic> json) {
-    return Teacher(
-      json['name'],
-      json['rate'],
-      json['reviews'],
-    );
-  }
+  Map toJson() => {
+        'name': name,
+        'rate': rate,
+        'reviews': reviews,
+      };
+
+  Teacher.fromJson(Map json)
+      : name = json['name'],
+        rate = json['rate'],
+        reviews = json['reviews'];
 }

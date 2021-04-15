@@ -33,13 +33,11 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
               Container(
                   height: 550,
                   child: ListView(
-                    //https://api.flutter.dev/flutter/widgets/ListView-class.html
                     padding: EdgeInsets.only(bottom: 10),
                     shrinkWrap: true,
                     children: (widget.teacher.reviews)
                         .map<Widget>((review) => _reviewCard(review))
                         .toList(),
-                    //SizedBox(height: 10),
                   )),
             ])));
   }
@@ -55,7 +53,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 blurRadius: 6,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: Offset(0, 3),
               ),
             ],
             borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -98,7 +96,7 @@ class _TeacherProfileScreenState extends State<TeacherProfileScreen> {
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
                     blurRadius: 6,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: Offset(0, 3),
                   ),
                 ],
                 borderRadius: BorderRadius.all(Radius.circular(5))),

@@ -1,18 +1,22 @@
 import 'dart:convert';
 
+import 'package:ame/src/models/service_response.dart';
 import 'package:ame/src/models/teacher.dart';
-import 'package:http/http.dart' as http;
+import 'package:ame/src/services/base_service.dart';
 
-class TeacherService {
-  Future<List<Teacher>> fetchTeachers() async {
-    final response =
-        await http.get(Uri.https('jsonplaceholder.typicode.com', 'albums/1'));
+class TeacherService extends BaseService {
+  TeacherService() : super('teacher/');
+
+  Future<ServiceResponse<List<Teacher>>> fetchTeachers() async {
+    List<Teacher> teachers = [];
+
+    final response = await this.get(path: 'getTeachers');
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)["teachers"]
-          .map((teacher) => Teacher.fromJson(jsonDecode(teacher)));
-    } else {
-      throw Exception('Failed to load teachers');
-    }
+      for (Map i in jsonDecode(response.body))
+        teachers.add(Teacher.fromJson(i));
+      return Future.value(ServiceResponse(teachers, null));
+    } else
+      return Future.value(ServiceResponse(null, "Failed to fetch Teachers"));
   }
 }
