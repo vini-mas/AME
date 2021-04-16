@@ -1,18 +1,16 @@
 import 'package:ame/src/providers/teacher_provider.dart';
-import 'package:ame/src/screens/teacher_profile_screen.dart';
+import 'package:ame/src/screens/teachers_list/widgets/teacher_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../models/teacher.dart';
-import '../styles/ame_colors.dart';
+import '../../styles/ame_colors.dart';
 
-class TeacherListScreen extends StatefulWidget {
+class TeachersListScreen extends StatefulWidget {
   static const String routeName = '/teacher_list_screen';
 
   @override
-  _TeacherListScreenState createState() => _TeacherListScreenState();
+  _TeachersListScreenState createState() => _TeachersListScreenState();
 }
 
 List<String> institutes = [
@@ -21,7 +19,7 @@ List<String> institutes = [
   "Instituto 3",
 ];
 
-class _TeacherListScreenState extends State<TeacherListScreen> {
+class _TeachersListScreenState extends State<TeachersListScreen> {
   String? _selectedInstitute;
 
   @override
@@ -122,8 +120,8 @@ class _TeacherListScreenState extends State<TeacherListScreen> {
                         itemCount: teacherProvider.filteredTeachers.length,
                         itemBuilder: (_, i) {
                           return ListTile(
-                            title: _teacherCard(
-                                teacherProvider.filteredTeachers[i]),
+                            title: TeacherCard(
+                                teacher: teacherProvider.filteredTeachers[i]),
                           );
                         },
                         padding: EdgeInsets.only(bottom: 10),
@@ -131,68 +129,6 @@ class _TeacherListScreenState extends State<TeacherListScreen> {
                       )),
                 ],
               ))),
-    );
-  }
-
-  _teacherCard(Teacher teacher) {
-    return Column(
-      children: <Widget>[
-        SizedBox(height: 10),
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(_routeTeacherProfileScreen(teacher));
-          },
-          child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              height: 50,
-              width: 350,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      constraints: BoxConstraints(maxWidth: 220),
-                      child: Text(
-                        teacher.name,
-                        style: GoogleFonts.montserrat(
-                          color: AmeColors.primaryBlue,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        softWrap: true,
-                      ),
-                    ),
-                    Expanded(flex: 1, child: Container()),
-                    Text(teacher.rate,
-                        style: GoogleFonts.montserrat(
-                            color: AmeColors().getRatingColor(teacher.rate),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500)),
-                  ])),
-        )
-      ],
-    );
-  }
-
-  Route _routeTeacherProfileScreen(Teacher teacher) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          TeacherProfileScreen(
-        teacher: teacher,
-      ),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return child;
-      },
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:ame/src/styles/ame_colors.dart';
-import 'package:ame/src/screens/teacher_list_screen.dart';
+import 'package:ame/src/screens/teachers_list/teachers_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -53,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
                     minimumSize: Size(350, 50),
                     textStyle: TextStyle(fontSize: 16)),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(TeacherListScreen.routeName);
+                  Navigator.of(context).pushNamed(TeachersListScreen.routeName);
                 },
                 child: Text('Começar'),
               )
