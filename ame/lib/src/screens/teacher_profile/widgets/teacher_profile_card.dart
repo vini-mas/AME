@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TeacherProfileCard extends StatelessWidget {
-  final Teacher teacher;
+  final Teacher? teacher;
   TeacherProfileCard({Key? key, required this.teacher}) : super(key: key);
 
   @override
@@ -28,24 +28,31 @@ class TeacherProfileCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      constraints: BoxConstraints(maxWidth: 220),
-                      child: Text(
-                        teacher.name,
-                        style: GoogleFonts.montserrat(
-                          color: AmeColors.primaryBlue,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w400,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Text(
+                          teacher?.name == null ? "--" : teacher!.name,
+                          style: GoogleFonts.montserrat(
+                            color: AmeColors.primaryBlue,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          softWrap: true,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        softWrap: true,
                       ),
                     ),
-                    Expanded(flex: 1, child: Container()),
-                    Text(teacher.rate,
-                        style: GoogleFonts.montserrat(
-                            color: AmeColors.getRatingColor(teacher.rate),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400)),
+                    Container(
+                      width: 45,
+                      child: Text(teacher?.rate == null ? "--" : teacher!.rate,
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.montserrat(
+                              color: AmeColors.getRatingColor(teacher?.rate),
+                              fontSize: 24,
+                              fontWeight: FontWeight.w400)),
+                    ),
                   ])),
         ],
       ),

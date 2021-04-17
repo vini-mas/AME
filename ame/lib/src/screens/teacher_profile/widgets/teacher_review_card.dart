@@ -30,56 +30,64 @@ class TeacherReviewCard extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(5))),
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 18),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          constraints: BoxConstraints(maxWidth: 220),
-                          child: Text(
-                            review.name,
-                            style: GoogleFonts.montserrat(
-                              color: AmeColors.primaryBlue,
-                              fontSize: 16,
-                              fontStyle: FontStyle.italic,
-                            ),
-                            softWrap: true,
-                          ),
-                        ),
-                        Expanded(flex: 1, child: Container()),
-                        Text(
-                          review.rate,
-                          style: GoogleFonts.montserrat(
-                              color: AmeColors.getRatingColor(review.rate),
-                              fontSize: 16),
-                        ),
-                      ]),
-                  SizedBox(height: 6),
-                  Container(
-                      constraints: BoxConstraints(maxWidth: 240, maxHeight: 70),
-                      padding: EdgeInsets.only(right: 20),
-                      child: Row(
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Expanded(
                             flex: 1,
-                            child: Text(
-                              review.description,
-                              style: GoogleFonts.montserrat(
-                                color: AmeColors.lightGray,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                            child: Container(
+                              child: Text(
+                                review.name,
+                                style: GoogleFonts.montserrat(
+                                  color: AmeColors.primaryBlue,
+                                  fontSize: 16,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                                softWrap: true,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 4,
                             ),
-                          )
-                        ],
-                      ))
+                          ),
+                          Container(
+                            width: 40,
+                            child: Text(
+                              review.rate,
+                              textAlign: TextAlign.right,
+                              style: GoogleFonts.montserrat(
+                                  color: AmeColors.getRatingColor(review.rate),
+                                  fontSize: 16),
+                            ),
+                          ),
+                        ]),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                        padding:
+                            EdgeInsets.only(left: 5, right: 20, bottom: 10),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                review.description,
+                                style: GoogleFonts.montserrat(
+                                  color: AmeColors.lightGray,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                              ),
+                            )
+                          ],
+                        )),
+                  )
                 ],
               )),
         )

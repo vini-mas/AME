@@ -1,6 +1,6 @@
-import 'package:ame/src/screens/teachers_list/teachers_list_screen.dart';
-import 'package:ame/src/screens/welcome/welcome_screen.dart';
 import 'package:ame/src/providers/teacher_provider.dart';
+import 'package:ame/src/screens/welcome/welcome_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +22,10 @@ class _MyAppState extends State<MyApp> {
             create: (_) => TeacherProvider(),
           )
         ],
-        child: MaterialApp(title: 'AME', theme: ThemeData(), routes: {
-          '/': (context) => WelcomeScreen(),
-          TeachersListScreen.routeName: (context) => TeachersListScreen(),
-        }));
+        child: MaterialApp(
+          title: 'AME',
+          theme: ThemeData(),
+          home: WelcomeScreen(),
+        ));
   }
 }

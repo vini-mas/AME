@@ -18,7 +18,10 @@ List<Review> initialReviews = [
 ];
 
 List<Teacher> initialTeachers = [
-  Teacher("João da Silva Rodrigues", "1.7", initialReviews),
+  Teacher(
+      "João da Silva Rodrigues da Silva Rodrigues da Silva Rodrigues da Silva Rodrigues",
+      "1.7",
+      initialReviews),
   Teacher("Maria da Silva Rodrigues", "4.2", initialReviews),
   Teacher("Jorge da Silva Rodrigues", "3.2", initialReviews),
   Teacher("Rodolfo da Silva Rodrigues", "5.0", initialReviews),
@@ -26,6 +29,14 @@ List<Teacher> initialTeachers = [
   Teacher("Fred da Silva Rodrigues", "2.3", initialReviews),
   Teacher("Francisco da Silva Rodrigues", "3.4", initialReviews),
   Teacher("Roberta da Silva Rodrigues", "4.4", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
+  Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
   Teacher("Sanderson da Silva Rodrigues", "4.1", initialReviews),
 ];
 

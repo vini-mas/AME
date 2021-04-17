@@ -1,21 +1,23 @@
+import 'package:ame/nav_bar.dart';
 import 'package:ame/src/styles/ame_colors.dart';
-import 'package:ame/src/screens/teachers_list/teachers_list_screen.dart';
+import 'package:ame/src/styles/ame_size.dart';
+import 'package:ame/src/utils/nav_utils.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  static const String routeName = '/welcome';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AmeColors.white,
-        body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 150),
-              SizedBox(
-                height: 150,
-                width: 250,
-                child: Column(
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.all(AmeSize.getSideSpacing(context)),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
@@ -41,23 +43,23 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 300),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: AmeColors.primaryBlue,
-                    onPrimary: AmeColors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                    ),
-                    minimumSize: Size(350, 50),
-                    textStyle: TextStyle(fontSize: 16)),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(TeachersListScreen.routeName);
-                },
-                child: Text('Começar'),
-              )
-            ],
+                Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: AmeColors.primaryBlue,
+                      onPrimary: AmeColors.white,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      minimumSize: Size(double.infinity, 50),
+                      textStyle: TextStyle(fontSize: 16)),
+                  onPressed: () {
+                    NavUtils(context).pushScreen(NavBar());
+                  },
+                  child: Text('Começar'),
+                )
+              ],
+            ),
           ),
         ));
   }
