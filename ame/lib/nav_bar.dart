@@ -15,7 +15,7 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   PersistentTabController _controller =
-      PersistentTabController(initialIndex: 0);
+      PersistentTabController(initialIndex: 1);
 
   List<Widget> _navScreens() {
     return [
