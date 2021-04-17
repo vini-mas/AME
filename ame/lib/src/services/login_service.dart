@@ -9,7 +9,7 @@ class LoginService extends BaseService {
   final String user;
   final String password;
 
-  LoginService(this.user, this.password) : super('login/');
+  LoginService(this.user, this.password) : super('/login');
 
   //Add credentials on requisition
   Future<ServiceResponse<User>> fetchUser() async {

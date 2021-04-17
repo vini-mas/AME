@@ -24,6 +24,12 @@ class _TeachersListScreenState extends State<TeachersListScreen> {
   String? _selectedInstitute;
 
   @override
+  void initState() {
+    super.initState();
+    Provider.of<TeacherProvider>(context, listen: false).fetchTeachers();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<TeacherProvider>(
         builder: (context, teacherProvider, _) => Scaffold(

@@ -5,12 +5,12 @@ import 'package:ame/src/models/teacher.dart';
 import 'package:ame/src/services/base_service.dart';
 
 class TeacherService extends BaseService {
-  TeacherService() : super('teacher/');
+  TeacherService() : super('/professor');
 
   Future<ServiceResponse<List<Teacher>>> fetchTeachers() async {
     List<Teacher> teachers = [];
 
-    final response = await this.get(path: 'getTeachers');
+    final response = await this.get(path: '/list');
 
     if (response.statusCode == 200) {
       for (Map i in jsonDecode(response.body))

@@ -1,14 +1,22 @@
 class User {
-  final String login;
+  final int id;
+  //final String login;
   final String name;
+  final String email;
 
-  User(this.login, this.name);
+  User(
+      this.id,
+      //this.login,
+      this.name,
+      this.email);
 
   Map toJson() => {
-        'login': login,
+        //'login': login,
       };
 
   User.fromJson(Map json)
-      : login = json['login'],
-        name = json['name'];
+      : id = json['id'],
+        //login = json['login'],
+        name = json['name'],
+        email = json['email'];
 }

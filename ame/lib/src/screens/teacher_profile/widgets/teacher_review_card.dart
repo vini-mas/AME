@@ -40,7 +40,7 @@ class TeacherReviewCard extends StatelessWidget {
                             flex: 1,
                             child: Container(
                               child: Text(
-                                review.name,
+                                review.student.name,
                                 style: GoogleFonts.montserrat(
                                   color: AmeColors.primaryBlue,
                                   fontSize: 16,
@@ -55,7 +55,7 @@ class TeacherReviewCard extends StatelessWidget {
                           Container(
                             width: 40,
                             child: Text(
-                              review.rate,
+                              review.rate.toString(),
                               textAlign: TextAlign.right,
                               style: GoogleFonts.montserrat(
                                   color: AmeColors.getRatingColor(review.rate),

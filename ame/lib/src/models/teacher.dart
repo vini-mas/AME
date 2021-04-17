@@ -1,20 +1,32 @@
+import 'package:ame/src/models/user.dart';
+
 import 'review.dart';
 
 class Teacher {
-  final String name;
-  final String rate;
+  final int id;
+  final int institute;
+  final String lattesLink;
+  final double? rate;
+  final User user;
   final List<Review> reviews;
 
-  Teacher(this.name, this.rate, this.reviews);
+  Teacher(this.id, this.institute, this.lattesLink, this.rate, this.user,
+      this.reviews);
 
   Map toJson() => {
-        'name': name,
+        'institute': institute,
         'rate': rate,
         'reviews': reviews,
       };
 
   Teacher.fromJson(Map json)
-      : name = json['name'],
+      : id = json['id'],
+        institute = int.parse(json['institute']),
         rate = json['rate'],
-        reviews = json['reviews'];
+        lattesLink = json['lattesLink'],
+        user = User.fromJson(json['user']),
+        reviews = json['reviews']
+            .map((review) => Review.fromJson(review))
+            .toList()
+            .cast<Review>();
 }
