@@ -23,7 +23,7 @@ class Teacher {
       : id = json['id'],
         institute = int.parse(json['institute']),
         rate = json['rate'],
-        lattesLink = json['lattesLink'],
+        lattesLink = json['lattesLink'] == null ? '' : json['lattesLink'],
         user = User.fromJson(json['user']),
         reviews = json['reviews']
             .map((review) => Review.fromJson(review))
