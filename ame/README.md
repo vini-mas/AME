@@ -1,9 +1,12 @@
-# ame
+# AME
+
+Projeto para aplicar alguns conhecimentos obtidos em Flutter, tendo como principal o uso de Providers para gerênciar e manipular
+estados principais da aplicação que fazem o contato entre as telas e os serviços da aplicação.
+
+O AME tem como objetivo inicial poder visualizar as notas de professores feitas por alunos da UFRGS.
+
 
 ## Getting Started
-
-https://flutter.dev/docs/get-started/
-Para se guiar, as telas ficam na pasta lib.
 
 This project is a starting point for a Flutter application.
 
